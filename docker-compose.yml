@@ -8,3 +8,4 @@ services:
       context: ./AspNetCoreApp
     ports:
       - '5000:80'
+      - '64327'
