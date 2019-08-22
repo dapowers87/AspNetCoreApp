@@ -5,11 +5,20 @@ export class Counter extends Component {
 
   constructor (props) {
     super(props);
-    this.state = { currentCount: 0 };
+    fetch('api/RedisData/CurrentCount')
+      .then(response => {
+        console.log('response = "' + response + '"');
+        if(response != null)
+          this.setState({ currentCount: response });
+        else 
+          this.setState({ currentCount: 0 });
+      })
     this.incrementCounter = this.incrementCounter.bind(this);
   }
 
   incrementCounter () {
+    fetch('api/RedisData/UpdateCount?newCount=' + this.state.currentCount + 1)
+    
     this.setState({
       currentCount: this.state.currentCount + 1
     });

@@ -1,7 +1,9 @@
-version: "3"
+version: "3.4"
 
 services:
-  web:
+  redis:
+    image: 'redis:latest'
+  aspnetcoreapp:
     build:
       context: ./AspNetCoreApp
     ports:
