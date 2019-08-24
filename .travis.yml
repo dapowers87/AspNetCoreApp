@@ -2,7 +2,9 @@ sudo: required
 services:
   - docker
 
-after_success:
+before_insall:
   - docker build -t dpowersnewg/AspCoreNet ./AspNetCoreApp
+
+after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push dpowersnewg/AspCoreNet
