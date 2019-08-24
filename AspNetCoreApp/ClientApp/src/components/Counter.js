@@ -18,8 +18,8 @@ export class Counter extends Component {
         else { 
           this.setState({ currentCount: 0 });
         }
-        console.log('currentCount2 = ' + this.state.currentCount);
       });
+      
     this.incrementCounter = this.incrementCounter.bind(this);
   }
 

@@ -3,6 +3,8 @@ version: "3.4"
 services:
   redis:
     image: 'redis:latest'
+  mongodb:
+    image: 'mongo:latest'
   aspnetcoreapp:
     build:
       context: ./AspNetCoreApp
