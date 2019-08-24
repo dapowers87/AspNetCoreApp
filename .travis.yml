@@ -3,8 +3,8 @@ services:
   - docker
 
 before_install:
-  - docker build -t dpowersnewg/AspCoreNet ./AspNetCoreApp
+  - docker build -t dpowersnewg/aspcorenetapp ./AspNetCoreApp
 
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push dpowersnewg/AspCoreNet
+  - docker push dpowersnewg/aspcorenetapp
