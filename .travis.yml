@@ -3,6 +3,6 @@ services:
   - docker
 
 after_success:
-  - docker build -t dpowersnewg/AspCoreNet .
+  - docker build -t dpowersnewg/AspCoreNet ./AspNetCoreApp
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push dpowersnewg/AspCoreNet
