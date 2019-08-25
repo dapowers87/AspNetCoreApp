@@ -3,6 +3,6 @@ services:
   - docker
 
 script:
-  - docker build -t dpowersnewg/aspcorenetapp ./AspNetCoreApp
+  - docker build -t dpowersnewg/aspnetcoreapp ./AspNetCoreApp
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push dpowersnewg/aspnetcoreapp
