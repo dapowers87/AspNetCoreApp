@@ -1,9 +1,23 @@
 sudo: required
+
 services:
-  - docker
+- docker
 
 script:
-  - docker build -t dpowersnewg/aspnetcoreapp ./AspNetCoreApp
-  - docker run --rm --privileged multiarch/qemu-user-static:register --reset
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push dpowersnewg/aspnetcoreapp
+# setup QEMU
+- docker run --rm --privileged multiarch/qemu-user-static:register --reset
+# build images
+- docker build -t aspnetcoreapp:$DOCKER_TAG -f Dockerfile.$DOCKER_ARCH .
+# push images
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+- docker tag aspnetcoreapp:$DOCKER_TAG dpowersnewg/aspnetcoreapp:$DOCKER_TAG
+- docker push dpowersnewg/aspnetcoreapp:$DOCKER_TAG
+- >
+  if [ "$LATEST" == "true" ]; then
+    docker tag aspnetcoreapp:$DOCKER_TAG dpowersnewg/aspnetcoreapp:latest
+    docker push dpowersnewg/aspnetcoreapp:latest
+  fi
+env:
+  matrix:
+  - DOCKER_TAG=arm       DOCKER_ARCH=arm    LATEST=true
+  #- DOCKER_TAG=amd64     DOCKER_ARCH=amd64
