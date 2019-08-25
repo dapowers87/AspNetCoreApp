@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS builder
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch-arm32v7 AS builder
 WORKDIR /source
 
 RUN curl -sL https://deb.nodesource.com/setup_10.x |  bash -
@@ -12,7 +12,7 @@ COPY ./ ./
 #RUN dotnet dev-certs https --trust
 RUN dotnet publish "./AspNetCoreApp.csproj" --output "./dist" --configuration Release -r linux-arm
 
-FROM mcr.microsoft.com/dotnet/core/runtime:2.2-stretch-slim
+FROM mcr.microsoft.com/dotnet/core/runtime:2.2-stretch-slim-arm32v7
 WORKDIR /root
 COPY --from=builder /source/dist .
 EXPOSE 80
