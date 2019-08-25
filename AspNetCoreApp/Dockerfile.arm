@@ -13,7 +13,7 @@ COPY ./ ./
 RUN dotnet publish "./AspNetCoreApp.csproj" --output "./dist" --configuration Release --no-restore
 
 FROM mcr.microsoft.com/dotnet/core/runtime:2.2-stretch-slim
-WORKDIR /app
+WORKDIR /root
 COPY --from=builder /source/dist .
 EXPOSE 80
 ENTRYPOINT ["dotnet", "AspNetCoreApp.dll"]
