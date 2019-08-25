@@ -7,7 +7,7 @@ script:
 # setup QEMU
 - docker run --rm --privileged multiarch/qemu-user-static:register --reset
 # build images
-- docker build -t aspnetcoreapp:$DOCKER_TAG -f Dockerfile.$DOCKER_ARCH .
+- docker build -t aspnetcoreapp:$DOCKER_TAG -f ./AspNetCoreApp/Dockerfile.$DOCKER_ARCH ./AspNetCoreApp
 # push images
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 - docker tag aspnetcoreapp:$DOCKER_TAG dpowersnewg/aspnetcoreapp:$DOCKER_TAG
