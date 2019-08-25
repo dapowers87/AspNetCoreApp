@@ -4,7 +4,10 @@ services:
 
 script:
   - docker build -t dpowersnewg/aspnetcoreapp ./AspNetCoreApp
+
+  - docker run --rm --privileged multiarch/qemu-user-static:register --reset
   - docker build -t dpowersnewg/aspnetcoreapp-arm -f ./AspNetCoreApp/Dockerfile.arm ./AspNetCoreApp
+  
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push dpowersnewg/aspnetcoreapp
   - docker push dpowersnewg/aspnetcoreapp-arm
