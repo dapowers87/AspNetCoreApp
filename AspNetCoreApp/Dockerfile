@@ -10,7 +10,7 @@ RUN dotnet restore
 COPY ./ ./
 
 #RUN dotnet dev-certs https --trust
-RUN dotnet publish "./AspNetCoreApp.csproj" --output "./dist" --configuration Debug --no-restore
+RUN dotnet publish "./AspNetCoreApp.csproj" --output "./dist" --configuration Release --no-restore
 
 FROM microsoft/dotnet:2.2-aspnetcore-runtime
 WORKDIR /app
