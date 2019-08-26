@@ -3,7 +3,7 @@ version: '3.4'
 services:
   aspnetcoreapp:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Production
       #- ASPNETCORE_URLS=https://+:443;http://+:80
       #- ASPNETCORE_HTTPS_PORT=44332
     #ports:
