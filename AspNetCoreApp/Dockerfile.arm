@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch-arm32v7 AS builder
 WORKDIR /source
 
-RUN /bin/bash -c 'curl -sL https://deb.nodesource.com/setup_10.x' | bash -
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 RUN apt-get install -y nodejs
 
 COPY *.csproj .
@@ -10,7 +10,7 @@ RUN dotnet restore
 COPY ./ ./
 
 #RUN dotnet dev-certs https --trust
-RUN dotnet publish "./AspNetCoreApp.csproj" --output "./dist" --configuration Release -r linux-arm
+RUN dotnet publish "./AspNetCoreApp.csproj" --output "./dist" --configuration Release --no-restore -r linux-arm
 
 FROM mcr.microsoft.com/dotnet/core/runtime:2.2-stretch-slim-arm32v7
 WORKDIR /root
