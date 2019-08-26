@@ -4,8 +4,11 @@ services:
 - docker
 
 script:
-# setup QEMU
-- docker run --rm --privileged multiarch/qemu-user-static:register --reset
+- >
+  if [ "$DOCKER_ARCH" == "arm" ]; then
+    # setup QEMU
+    docker run --rm --privileged multiarch/qemu-user-static:register --reset
+  fi
 # build images
 - docker build -t aspnetcoreapp:$DOCKER_TAG -f ./AspNetCoreApp/Dockerfile.$DOCKER_ARCH ./AspNetCoreApp
 # push images
@@ -19,5 +22,5 @@ script:
   fi
 env:
   matrix:
-  - DOCKER_TAG=arm       DOCKER_ARCH=arm    LATEST=true
-  #- DOCKER_TAG=amd64     DOCKER_ARCH=amd64
+  #- DOCKER_TAG=arm       DOCKER_ARCH=arm    
+  - DOCKER_TAG=amd64     DOCKER_ARCH=amd64  LATEST=true
