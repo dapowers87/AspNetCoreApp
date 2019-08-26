@@ -6,7 +6,7 @@ services:
   aspnetcoreapp:
     build:
       context: ./AspNetCoreApp
-      dockerfile: ./AspNetCoreApp/Dockerfile.amd64
+      dockerfile: ./Dockerfile.amd64
     ports:
       - '5000:80'
       - '64327'
